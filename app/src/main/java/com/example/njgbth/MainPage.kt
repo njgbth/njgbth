@@ -10,9 +10,8 @@ class MainPage : AppCompatActivity() {
     private lateinit var binding: ActivityMainPageBinding           //viewbinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_page)                 //화면출력
         binding = ActivityMainPageBinding.inflate(layoutInflater)   //viewbinding
-        val view = binding.root                                     //viewbinding
+        setContentView(binding.root)                                //화면출력
 
     }
     fun get_category(view: View) {

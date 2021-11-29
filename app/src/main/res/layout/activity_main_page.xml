@@ -41,6 +41,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <SearchView
+                android:id="@+id/search_Ingredient"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
@@ -70,8 +71,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="전체"
-                        android:clickable="true"
                         android:onClick="get_category"
+                        android:background="@color/gray"
                         android:textSize="25dp" />
 
                     <TextView
@@ -80,6 +81,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="곡류"
+                        android:onClick="get_category"
                         android:textSize="25dp" />
 
                     <TextView
@@ -88,6 +90,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="면"
+                        android:onClick="get_category"
                         android:textSize="25dp" />
 
                     <TextView
@@ -96,6 +99,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="육류"
+                        android:onClick="get_category"
                         android:textSize="25dp" />
 
                     <TextView
@@ -104,6 +108,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="채소"
+                        android:onClick="get_category"
                         android:textSize="25dp" />
 
                     <TextView
@@ -112,6 +117,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="과일"
+                        android:onClick="get_category"
                         android:textSize="25dp" />
                 </LinearLayout>
             </ScrollView>

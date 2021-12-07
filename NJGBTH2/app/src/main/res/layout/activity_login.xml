@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#75CCB7B7"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/logTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="냉장고를 부탁해"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/edtLoginId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="ID"
+        android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@+id/edtLoginPw"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogin"
+        app:layout_constraintStart_toEndOf="@+id/imgId" />
+
+    <EditText
+        android:id="@+id/edtLoginPw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="250dp"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edtLoginId"
+        app:layout_constraintStart_toStartOf="@+id/edtLoginId" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="95dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="4dp"
+        android:backgroundTint="#4CAF50"
+        android:text="@string/click_login"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtLoginPw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edtLoginId"
+        app:layout_constraintTop_toTopOf="@+id/edtLoginId"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <ImageView
+        android:id="@+id/imgId"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtLoginId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edtLoginId"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@mipmap/id" />
+
+    <ImageView
+        android:id="@+id/imgPw"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/outline"
+        app:layout_constraintBottom_toBottomOf="@+id/edtLoginPw"
+        app:layout_constraintEnd_toStartOf="@+id/edtLoginPw"
+        app:layout_constraintStart_toStartOf="@+id/imgId"
+        app:layout_constraintTop_toBottomOf="@+id/imgId"
+        app:srcCompat="@mipmap/key" />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="160dp"
+        android:backgroundTint="#4CAF50"
+        android:backgroundTintMode="add"
+        android:text="회원가입"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnFindId"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:backgroundTint="#4CAF50"
+        android:text="아이디 찾기"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSignUp"
+        app:layout_constraintEnd_toStartOf="@+id/btnFindPw"
+        app:layout_constraintStart_toEndOf="@+id/btnSignUp"
+        app:layout_constraintTop_toTopOf="@+id/btnSignUp" />
+
+    <Button
+        android:id="@+id/btnFindPw"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#4CAF50"
+        android:text="비밀번호 찾기"
+        app:layout_constraintBottom_toBottomOf="@+id/btnFindId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnFindId"
+        app:strokeColor="#FFFFFF" />
+</androidx.constraintlayout.widget.ConstraintLayout>

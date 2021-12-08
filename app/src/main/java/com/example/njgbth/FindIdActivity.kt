@@ -1,14 +1,11 @@
 package com.example.njgbth
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() {
+class FindIdActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        startActivity(Intent(this, MainPage::class.java))
-        finish()
+        setContentView(R.layout.activity_find_id)
     }
 }

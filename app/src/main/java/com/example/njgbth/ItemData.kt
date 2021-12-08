@@ -1,4 +1,4 @@
-package com.example.njgbth2
+package com.example.njgbth
 
 data class ItemData(val name : String) {
 }

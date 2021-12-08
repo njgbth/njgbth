@@ -1,11 +1,11 @@
-package com.example.njgbth2
+package com.example.njgbth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.njgbth2.databinding.ActivityResultBinding
-import com.example.njgbth2.databinding.ActivitySearchBinding
+import com.example.njgbth.databinding.ActivityResultBinding
+import com.example.njgbth.databinding.ActivitySearchBinding
 
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding

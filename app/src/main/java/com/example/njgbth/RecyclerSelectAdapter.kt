@@ -1,4 +1,4 @@
-package com.example.njgbth2
+package com.example.njgbth
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import android.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.njgbth2.databinding.IngredRecyclerBinding
-import com.example.njgbth2.databinding.ItemRecyclerBinding
+import com.example.njgbth.databinding.IngredRecyclerBinding
+import com.example.njgbth.databinding.ItemRecyclerBinding
 
 class RecyclerSelectAdapter(private val dataSet : ArrayList<IngredientData>): RecyclerView.Adapter<RecyclerSelectAdapter.ViewHolder>()  {
 

@@ -1,4 +1,4 @@
-package com.example.njgbth2
+package com.example.njgbth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

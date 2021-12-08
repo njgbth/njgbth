@@ -1,4 +1,4 @@
-package com.example.njgbth2
+package com.example.njgbth
 
 import android.content.Context
 import android.content.Intent
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.njgbth2.databinding.IngredRecyclerBinding
-import com.example.njgbth2.databinding.RecipeRecyclerBinding
+import com.example.njgbth.databinding.IngredRecyclerBinding
+import com.example.njgbth.databinding.RecipeRecyclerBinding
 
 class RecyclerResultAdapter(
     private val dataString : ArrayList<List<String>>,private val dataInt : ArrayList<List<Int>>

@@ -1,4 +1,4 @@
-package com.example.njgbth2
+package com.example.njgbth
 
 class IngredientData (
     val name: String)

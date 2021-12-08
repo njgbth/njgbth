@@ -1,10 +1,10 @@
-package com.example.njgbth2
+package com.example.njgbth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.njgbth2.databinding.ActivityLoginBinding
-import com.example.njgbth2.databinding.ActivitySignUpBinding
+import com.example.njgbth.databinding.ActivityLoginBinding
+import com.example.njgbth.databinding.ActivitySignUpBinding
 
 class LoginActivity : AppCompatActivity() {
 

@@ -1,9 +1,9 @@
-package com.example.njgbth2
+package com.example.njgbth
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.njgbth2.databinding.ItemRecyclerBinding
+import com.example.njgbth.databinding.ItemRecyclerBinding
 
 class RecyclerItemAdapter(private val dataSet: ArrayList<ItemData>) : RecyclerView.Adapter<RecyclerItemAdapter.ViewHolder>() {////일어나서 다시해보기. select받아와서 취소하고 되면 하기. 이미 선택된 자료에서 한번더 선택 -> 취소됨-> 그림제거
 

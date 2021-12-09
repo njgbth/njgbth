@@ -86,14 +86,14 @@ def insert_data():
 
     # 선호도 insert
     for i in range(len(recipe_info)):
-        doc_ref = db.collection(u'레시피db').document(u'레시피명').collection(recipe_info[i][1]).document(u'선호도')
+        doc_ref = db.collection(u'recipe').document(recipe_info[i][1])
         doc_ref.set({
             u'선호도': 0
         }, merge=True)
 
     # 링크 insert
     for i in range(len(recipe_info)):
-        doc_ref = db.collection(u'레시피db').document(u'레시피명').collection(recipe_info[i][1]).document(u'링크')
+        doc_ref = db.collection(u'recipe').document(recipe_info[i][1])
         doc_ref.set({
             u'링크': recipe_info[i][0]
         }, merge=True)
@@ -101,7 +101,7 @@ def insert_data():
 # 레시피 이름 및 재료 insert
     for i in range(len(recipe_info)):
         print("inserting: " + recipe_info[i][1])
-        doc_ref = db.collection(u'레시피db').document(u'레시피명').collection(recipe_info[i][1]).document(u'재료')
+        doc_ref = db.collection(u'recipe').document(recipe_info[i][1]).collection(u'재료').document(u'재료')
         for j in range(len(recipe_info[i][2])):
             doc_ref.set({
                 recipe_info[i][2][j]: 0

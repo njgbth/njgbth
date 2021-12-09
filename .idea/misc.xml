@@ -3,20 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/njgbth/app/src/main/res/drawable-v24/white_bg_common_outline.xml" value="0.184375" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_aaa.xml" value="0.2015625" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_find_pw.xml" value="0.16822916666666668" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_login.xml" value="0.16822916666666668" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_main.xml" value="0.2151268115942029" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_main_page.xml" value="0.25" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_result.xml" value="0.16822916666666668" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_search.xml" value="0.16822916666666668" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_show_recipes.xml" value="0.190625" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/activity_sign_up.xml" value="0.16822916666666668" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/fragment_ingredient.xml" value="0.25" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/item_recycler.xml" value="0.16822916666666668" />
-        <entry key="..\:/njgbth/app/src/main/res/layout/recipe_recycler.xml" value="0.16822916666666668" />
-        <entry key="..\:/njgbth/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.184375" />
+        <entry key="..\:/dbtest2/app/src/main/res/layout/activity_find_id.xml" value="0.15625" />
+        <entry key="..\:/dbtest2/app/src/main/res/layout/activity_main_page.xml" value="0.15625" />
       </map>
     </option>
   </component>

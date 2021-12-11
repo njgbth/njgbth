@@ -10,9 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.njgbth.databinding.IngredRecyclerBinding
 import com.example.njgbth.databinding.RecipeRecyclerBinding
 
-class RecyclerResultAdapter(
-    private val dataString : ArrayList<List<String>>,private val dataInt : ArrayList<List<Int>>
-    ) :RecyclerView.Adapter<RecyclerResultAdapter.ViewHolder>() {
+class RecyclerResultAdapter(private val dataString : ArrayList<List<String>>,private val dataInt : ArrayList<List<Int>>) :RecyclerView.Adapter<RecyclerResultAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

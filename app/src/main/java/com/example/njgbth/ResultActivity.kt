@@ -1,5 +1,6 @@
 package com.example.njgbth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -11,11 +12,18 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
     private val dataString: ArrayList<List<String>> = arrayListOf()
     private val dataInt : ArrayList<List<Int>> = arrayListOf()
+    private var getdata : ArrayList<IngredientData> =arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val intent: Intent =getIntent()     //데이터 받아옴
+        getdata = intent.getSerializableExtra("data") as ArrayList<IngredientData>  //데이터 받아옴
+        for(i in getdata){      //확인용
+            println(i.name)
+        }
+
         binding.resultRecycle.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.VERTICAL,false)
         binding.resultRecycle.adapter = RecyclerResultAdapter(dataString,dataInt)
@@ -23,6 +31,7 @@ class ResultActivity : AppCompatActivity() {
             DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL)
         )
+
         addDataString()
         addDataInt()
     }

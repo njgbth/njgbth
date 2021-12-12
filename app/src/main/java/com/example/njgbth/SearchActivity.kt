@@ -1,13 +1,23 @@
 package com.example.njgbth
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.njgbth.databinding.ActivitySearchBinding
+import com.google.firebase.FirebaseException
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 import kotlin.collections.ArrayList
 
 
@@ -30,9 +40,15 @@ class SearchActivity : AppCompatActivity() {
 
 
         binding.searchIng.layoutManager = GridLayoutManager(this,3)
-        binding.searchIng.adapter = RecyclerIngrediAdapter(dataIngredient,dataSelect,binding)
         binding.searchIng.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
-        //addDataIngredient()
+        CoroutineScope(Dispatchers.IO).launch {
+            runBlocking {
+                alldb()
+            }
+            CoroutineScope(Dispatchers.Main).launch {
+                binding.searchIng.adapter = RecyclerIngrediAdapter(dataIngredient,dataSelect,binding)
+            }
+        }
 
 
         binding.searchSelect.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
@@ -42,10 +58,11 @@ class SearchActivity : AppCompatActivity() {
 
         binding.searchRecommend.setOnClickListener {
             val intent = Intent(this,ResultActivity::class.java)
+            println(dataSelect)
             intent.putExtra("data",dataSelect)
             startActivity(intent)
         }
-        search()
+        search_click()
 
     }
 
@@ -80,16 +97,90 @@ class SearchActivity : AppCompatActivity() {
 
     }
 */
-    private fun search(){
+    private fun search_click(){
         binding.searchSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {  //검색 눌렀을 때
                 if(query!=null)                                 //검색내용이 있을 때
                     println(query)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        runBlocking {
+                            saerch_ingredi(query.toString())
+                        }
+                        CoroutineScope(Dispatchers.Main).launch {
+                            binding.searchIng.adapter = RecyclerIngrediAdapter(dataIngredient,dataSelect,binding)
+                            println("bbb")
+                        }
+                    }
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean { //검색창 수정될 때
                 return true
             }
         })
+    }
+    suspend fun saerch_ingredi(s : String): Boolean {
+        val db = Firebase.firestore
+        var name : ArrayList<String> = arrayListOf()
+        var r = false
+        if(s=="")
+            return false
+        dataIngredient.clear()
+
+        return try {
+            db.collection("재료db").document("재료명")
+                .get()
+                .addOnSuccessListener { result ->
+                    Log.d(ContentValues.TAG, "${result.data}")
+                    if(result.data!=null){
+                        name= result.data!!.keys.toList() as ArrayList<String>
+                        println(name)
+                        for(i in 0..name.size-1){
+                            if(name[i].startsWith(s)){
+                                dataIngredient.add(IngredientData(name[i]))
+                            }
+                        }
+
+                    }
+                    r=true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(ContentValues.TAG, "Error getting documents.", exception)
+                    r=false
+                }.await()
+            r
+        }catch (e: FirebaseException){
+            Log.e("error:","erroe:"+e.message.toString())
+            false
+        }
+    }
+
+    suspend fun alldb(): Boolean {
+        val db = Firebase.firestore
+        var name : ArrayList<String> = arrayListOf()
+        var r = false
+        dataIngredient.clear()
+
+        return try {
+            db.collection("재료db").document("재료명")
+                .get()
+                .addOnSuccessListener { result ->
+                    Log.d(ContentValues.TAG, "${result.data}")
+                    if(result.data!=null){
+                        name= result.data!!.keys.toList() as ArrayList<String>
+                        for(i in 0..name.size-1){
+                            dataIngredient.add(IngredientData(name[i]))
+                        }
+                    }
+                    r=true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(ContentValues.TAG, "Error getting documents.", exception)
+                    r=false
+                }.await()
+            r
+        }catch (e: FirebaseException){
+            Log.e("error:","erroe:"+e.message.toString())
+            false
+        }
     }
 }

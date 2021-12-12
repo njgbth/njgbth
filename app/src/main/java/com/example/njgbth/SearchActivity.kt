@@ -24,7 +24,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.searchCategory.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        binding.searchCategory.adapter = RecyclerItemAdapter(dataItem)
+        binding.searchCategory.adapter = RecyclerItemAdapter(dataItem,dataSelect,binding)
         binding.searchCategory.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
         addDataItem()
 
@@ -32,7 +32,7 @@ class SearchActivity : AppCompatActivity() {
         binding.searchIng.layoutManager = GridLayoutManager(this,3)
         binding.searchIng.adapter = RecyclerIngrediAdapter(dataIngredient,dataSelect,binding)
         binding.searchIng.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
-        addDataIngredient()
+        //addDataIngredient()
 
 
         binding.searchSelect.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
@@ -58,6 +58,7 @@ class SearchActivity : AppCompatActivity() {
         dataItem.add(ItemData("과일"))
         dataItem.add(ItemData("유제품"))
     }
+    /*
     private fun addDataIngredient() {
         //DB에 재료가 구분되면 저장. 아래는 예시
         dataIngredient.add(IngredientData("벼"))
@@ -67,8 +68,6 @@ class SearchActivity : AppCompatActivity() {
         dataIngredient.add(IngredientData("고등어"))
         dataIngredient.add(IngredientData("삼치"))
         dataIngredient.add(IngredientData("한우"))
-
-
     }
 
     private fun addDataSelect() {   //나중에 삭제
@@ -80,7 +79,7 @@ class SearchActivity : AppCompatActivity() {
         dataSelect.add(IngredientData("한우"))
 
     }
-
+*/
     private fun search(){
         binding.searchSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {  //검색 눌렀을 때

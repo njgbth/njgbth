@@ -4,8 +4,8 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class IngredientData (
-    val name: String):Parcelable {
-    constructor(parcel: Parcel) : this(parcel.readString().toString()) {
+    val name: String, val cate : Int):Parcelable {
+    constructor(parcel: Parcel) : this(parcel.readString().toString(),parcel.readInt()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

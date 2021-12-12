@@ -12,27 +12,27 @@ class RecyclerSelectAdapter(
     private val Sbinding: ActivitySearchBinding
 ): RecyclerView.Adapter<RecyclerSelectAdapter.ViewHolder>()  {
 
+    var num=0
 
-
-    class ViewHolder(private val binding: IngredRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: IngredRecyclerBinding, private var num : Int) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: IngredientData ) {
             binding.ingredName.text = data.name
             Glide.with(binding.ingredImg.context).load(R.drawable.basic).into(binding.ingredImg)
+            num=data.cate
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerSelectAdapter.ViewHolder {
-   /*   val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler,parent, false)
-        return ViewHolder(view)*/
+
         val binding = IngredRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         binding.ingredName.setOnClickListener(){
-            removeDataSelect(binding.ingredName.text.toString())
+            removeDataSelect(binding.ingredName.text.toString(),num)
         }
         binding.ingredImg.setOnClickListener(){
-            removeDataSelect(binding.ingredName.text.toString())
+            removeDataSelect(binding.ingredName.text.toString(),num)
         }
 
-        return ViewHolder(binding)
+        return ViewHolder(binding,num)
     }
 
     override fun onBindViewHolder(holder: RecyclerSelectAdapter.ViewHolder, position: Int) {
@@ -42,15 +42,8 @@ class RecyclerSelectAdapter(
     override fun getItemCount(): Int {
         return dataSet.size
     }
-   /* class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val itemName: TextView = view.name
-
-        fun bind(data:List<String>) {
-            itemName.text = data[0]
-        }
-    }*/
-   fun removeDataSelect(text : String){       //dateSelect에 추가
-       dataSet.remove(IngredientData(text))
+   fun removeDataSelect(text : String, num : Int){       //dateSelect에 추가
+       dataSet.remove(IngredientData(text,num))
        Sbinding.searchSelect.adapter = RecyclerSelectAdapter(dataSet,Sbinding)  //반영
 
    }

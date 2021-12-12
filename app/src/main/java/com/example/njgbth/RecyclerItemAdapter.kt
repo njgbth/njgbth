@@ -39,7 +39,10 @@ class RecyclerItemAdapter(
             CoroutineScope(Dispatchers.IO).launch {
                 var result =false
                 runBlocking {
-                    result = db(n)
+                    if(n==0)
+                        result=alldb()
+                    else
+                        result = db(n)
                 }
                 println("출력:"+result)
                 println("item"+item)
@@ -92,11 +95,40 @@ class RecyclerItemAdapter(
                         cate= result.data!!.values.toList() as ArrayList<Int>
                         for(i in 0..cate.size-1){
                             if(cate[i].toInt()==n){
-                                item.add(IngredientData(name[i],cate[i]))
+                                item.add(IngredientData(name[i]))
                             }
                         }
                         println("n : "+n)
                         println("db완료"+item)
+                    }
+                    r=true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(ContentValues.TAG, "Error getting documents.", exception)
+                    r=false
+                }.await()
+            r
+        }catch (e: FirebaseException){
+            Log.e("error:","erroe:"+e.message.toString())
+            false
+        }
+    }
+    suspend fun alldb(): Boolean {
+        val db = Firebase.firestore
+        var name : ArrayList<String> = arrayListOf()
+        var r = false
+        item.clear()
+
+        return try {
+            db.collection("재료db").document("재료명")
+                .get()
+                .addOnSuccessListener { result ->
+                    Log.d(ContentValues.TAG, "${result.data}")
+                    if(result.data!=null){
+                        name= result.data!!.keys.toList() as ArrayList<String>
+                        for(i in 0..name.size-1){
+                            item.add(IngredientData(name[i]))
+                        }
                     }
                     r=true
                 }

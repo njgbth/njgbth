@@ -12,13 +12,10 @@ class RecyclerSelectAdapter(
     private val Sbinding: ActivitySearchBinding
 ): RecyclerView.Adapter<RecyclerSelectAdapter.ViewHolder>()  {
 
-    var num=0
-
-    class ViewHolder(private val binding: IngredRecyclerBinding, private var num : Int) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: IngredRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: IngredientData ) {
             binding.ingredName.text = data.name
             Glide.with(binding.ingredImg.context).load(R.drawable.basic).into(binding.ingredImg)
-            num=data.cate
         }
     }
 
@@ -26,13 +23,13 @@ class RecyclerSelectAdapter(
 
         val binding = IngredRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         binding.ingredName.setOnClickListener(){
-            removeDataSelect(binding.ingredName.text.toString(),num)
+            removeDataSelect(binding.ingredName.text.toString())
         }
         binding.ingredImg.setOnClickListener(){
-            removeDataSelect(binding.ingredName.text.toString(),num)
+            removeDataSelect(binding.ingredName.text.toString())
         }
 
-        return ViewHolder(binding,num)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerSelectAdapter.ViewHolder, position: Int) {
@@ -42,8 +39,8 @@ class RecyclerSelectAdapter(
     override fun getItemCount(): Int {
         return dataSet.size
     }
-   fun removeDataSelect(text : String, num : Int){       //dateSelect에 추가
-       dataSet.remove(IngredientData(text,num))
+   fun removeDataSelect(text : String){       //dateSelect에 추가
+       dataSet.remove(IngredientData(text))
        Sbinding.searchSelect.adapter = RecyclerSelectAdapter(dataSet,Sbinding)  //반영
 
    }

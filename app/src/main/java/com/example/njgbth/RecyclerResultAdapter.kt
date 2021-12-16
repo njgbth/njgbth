@@ -84,7 +84,7 @@ class RecyclerResultAdapter(private val dataRecipe : ArrayList<RecipeData>)
         }
         fun updatetest(docu : String,num : Int){
             val db = Firebase.firestore
-            db.collection("testdb").document("레시피명").update("선호도",num)
+            db.collection("recipe").document("docu").update("선호도",num)
         }
     }
 }

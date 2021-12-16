@@ -5,12 +5,10 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
-import android.widget.Adapter
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.njgbth.databinding.ActivityResultBinding
@@ -20,6 +18,13 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
+import kotlin.concurrent.timer
+import android.os.Looper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+
 
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
@@ -40,6 +45,20 @@ class ResultActivity : AppCompatActivity() {
         for(i in getdata){      //확인용
             println(i)
         }
+        if(getdata.isEmpty()){
+            println("empty")
+            println(getdata)
+        }
+        if(getdata==null){
+            println("null")
+            println(getdata)
+        }
+        if(getdata.isNullOrEmpty()){
+            println("nullor empty")
+            println(getdata)
+            Toast.makeText(applicationContext,"재료를 선택해주세요.", Toast.LENGTH_SHORT).show()
+            finish()
+        }
 
         binding.resultRecycle.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
         binding.resultRecycle.adapter = RecyclerResultAdapter(dataRecipe)
@@ -48,7 +67,6 @@ class ResultActivity : AppCompatActivity() {
                 DividerItemDecoration.VERTICAL)
         )
         addRecipe()
-
         val spinner = binding.spinner
         spinner.adapter = ArrayAdapter.createFromResource(this, R.array.sortList, android.R.layout.simple_spinner_item)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -73,6 +91,25 @@ class ResultActivity : AppCompatActivity() {
                 }
             }
         }
+        var second = 0
+        timer(period = 1000,initialDelay = 1000){
+            second++
+            if(second==3){
+                if(dataRecipe.isNullOrEmpty()){
+                    val handler = Handler(Looper.getMainLooper())
+                    handler.postDelayed({
+                        Toast.makeText(applicationContext,"맞는 레시피가 없습니다. 다시 재료를 선택해주세요", Toast.LENGTH_SHORT).show()
+                    }, 0)
+
+                    finish()
+                }
+                cancel()
+            }
+        }
+        //
+
+
+
 
     }
     fun weight_sort(){
@@ -86,8 +123,6 @@ class ResultActivity : AppCompatActivity() {
         binding.resultRecycle.adapter = RecyclerResultAdapter(dataRecipe)
     }
     fun addRecipe(){
-        if(getdata.isNullOrEmpty())
-            return
         val db = Firebase.firestore
         db.collection("recipe")
             .get()
@@ -104,11 +139,7 @@ class ResultActivity : AppCompatActivity() {
                                     for(i in getdata.toSet())
                                         sum+=result.data!!.get(i).toString().toInt()
                                     dataRecipe.add(RecipeData(document.id,document.get("링크") as String, sum, document.get("선호도").toString().toInt()))
-//                                    getweight.add(sum)
-//                                    dataString.add(document.id)
-//                                    datalink.add(document.get("링크") as String)
-//                                    dataInt.add(document.get("선호도").toString().toInt())
-//                                    println(getweight)
+                                    //binding.resultRecycle.adapter = RecyclerResultAdapter(dataRecipe)
                                     weight_sort()
                                 }
                             }

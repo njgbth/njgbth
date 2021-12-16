@@ -9,7 +9,7 @@ import com.example.njgbth.databinding.IngredRecyclerBinding
 
 class RecyclerIngrediAdapter(
     private val dataSet: ArrayList<IngredientData>,
-    private val dataSelect: ArrayList<IngredientData>,
+    private val dataSelect: ArrayList<String>,
     private val Sbinding: ActivitySearchBinding
 ) :RecyclerView.Adapter<RecyclerIngrediAdapter.ViewHolder>() {
     class ViewHolder(private val binding: IngredRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -38,8 +38,8 @@ class RecyclerIngrediAdapter(
         return dataSet.size
     }
     fun addDataSelect(text : String){       //dateSelect에 추가
-        if(!dataSelect.contains(IngredientData(text))){
-            dataSelect.add(IngredientData(text))
+        if(!dataSelect.contains(text)){
+            dataSelect.add(text)
             Sbinding.searchIng.adapter = RecyclerIngrediAdapter(dataSet,dataSelect,Sbinding)    //반영
         }
 

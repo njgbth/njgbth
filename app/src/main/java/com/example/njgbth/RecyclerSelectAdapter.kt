@@ -8,13 +8,13 @@ import com.example.njgbth.databinding.ActivitySearchBinding
 import com.example.njgbth.databinding.IngredRecyclerBinding
 
 class RecyclerSelectAdapter(
-    private val dataSet: ArrayList<IngredientData>,
+    private val dataSet: ArrayList<String>,
     private val Sbinding: ActivitySearchBinding
 ): RecyclerView.Adapter<RecyclerSelectAdapter.ViewHolder>()  {
 
     class ViewHolder(private val binding: IngredRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: IngredientData ) {
-            binding.ingredName.text = data.name
+        fun bind(data: String ) {
+            binding.ingredName.text = data
             Glide.with(binding.ingredImg.context).load(R.drawable.basic).into(binding.ingredImg)
         }
     }
@@ -40,7 +40,7 @@ class RecyclerSelectAdapter(
         return dataSet.size
     }
    fun removeDataSelect(text : String){       //dateSelect에 추가
-       dataSet.remove(IngredientData(text))
+       dataSet.remove(text)
        Sbinding.searchSelect.adapter = RecyclerSelectAdapter(dataSet,Sbinding)  //반영
 
    }

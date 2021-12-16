@@ -25,7 +25,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private val dataItem: ArrayList<ItemData> = arrayListOf()
     private val dataIngredient : ArrayList<IngredientData> = arrayListOf()
-    public val dataSelect : ArrayList<IngredientData> = arrayListOf()
+    public val dataSelect : ArrayList<String> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

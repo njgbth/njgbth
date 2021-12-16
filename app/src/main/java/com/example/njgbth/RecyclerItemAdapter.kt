@@ -21,7 +21,7 @@ import kotlinx.coroutines.tasks.await
 
 class RecyclerItemAdapter(
     private val dataSet: ArrayList<ItemData>,
-    private val dataSelect: ArrayList<IngredientData>,
+    private val dataSelect: ArrayList<String>,
     private val Sbinding: ActivitySearchBinding
     ) : RecyclerView.Adapter<RecyclerItemAdapter.ViewHolder>() {////일어나서 다시해보기. select받아와서 취소하고 되면 하기. 이미 선택된 자료에서 한번더 선택 -> 취소됨-> 그림제거
     //onBindViewHoler를 위한 정의 ViewHolder 정의

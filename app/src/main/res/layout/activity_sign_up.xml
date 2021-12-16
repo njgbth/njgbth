@@ -44,18 +44,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpTitle" />
 
+    <TextView
+        android:id="@+id/IdExample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/no_outline"
+        android:text="예) honggildong@naver.com"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/signUpId"
+        app:layout_constraintTop_toBottomOf="@+id/signUpId" />
+
     <EditText
         android:id="@+id/edtSignUpId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="5dp"
-        android:layout_marginTop="10dp"
-        android:singleLine="true"
         android:background="@drawable/white_bg_common_outline"
         android:ems="13"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="5dp"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="@+id/signUpId"
-        app:layout_constraintTop_toBottomOf="@+id/signUpId" />
+        app:layout_constraintTop_toBottomOf="@+id/IdExample" />
 
     <TextView
         android:id="@+id/signUpPw"
@@ -108,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signUpRePw" />
 
     <TextView
-        android:id="@+id/signUpName"
+        android:id="@+id/signUpEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -128,31 +138,6 @@
         android:singleLine="true"
         android:background="@drawable/white_bg_common_outline"
         android:ems="13"
-        app:layout_constraintStart_toStartOf="@+id/signUpName"
-        app:layout_constraintTop_toBottomOf="@+id/signUpName"/>
-
-    <TextView
-        android:id="@+id/signUpEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/no_outline"
-        android:text="이메일"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/edtSignUpName"
-        app:layout_constraintTop_toBottomOf="@+id/edtSignUpName" />
-
-    <EditText
-        android:id="@+id/edtSignUpEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="5dp"
-        android:layout_marginTop="10dp"
-        android:singleLine="true"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/white_bg_common_outline"
-        android:ems="13"
         app:layout_constraintStart_toStartOf="@+id/signUpEmail"
         app:layout_constraintTop_toBottomOf="@+id/signUpEmail"/>
 
@@ -160,13 +145,13 @@
         android:id="@+id/btnSignUpSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
         android:backgroundTint="#4CAF50"
         android:paddingVertical="15dp"
         android:text="가입하기"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSignUpEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/edtSignUpName" />
 
 
 

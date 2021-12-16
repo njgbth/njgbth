@@ -3,6 +3,11 @@ package com.example.njgbth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.njgbth.databinding.ActivityResultBinding
@@ -31,6 +36,42 @@ class ResultActivity : AppCompatActivity() {
             DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL)
         )
+
+        val spinner = binding.spinner
+        spinner.adapter = ArrayAdapter.createFromResource(this, R.array.sortList, android.R.layout.simple_spinner_item)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    //가중치 순으로 보여주기 - 처음진입시
+                    0 -> {
+
+
+
+                    }
+                    //가중치 순으로 보여주기 선택시
+                    1 -> {
+
+
+
+                    }
+                    //선호도 순으로 보여주기 선택시, 0번 복붙
+                    2 -> {
+
+
+
+                    }
+                }
+            }
+        }
 
         addDataString()
         addDataInt()

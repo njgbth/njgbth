@@ -2,9 +2,11 @@ package com.example.njgbth
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet.VISIBLE
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -37,10 +39,19 @@ class RecyclerResultAdapter(private val dataString : ArrayList<List<String>>,pri
             binding.nameOFRecipe.text = dataS[0]
             binding.numOfHeart.text = dataI[0].toString()
             Glide.with(binding.imgOfRecipe.context).load(R.drawable.basic).into(binding.imgOfRecipe)
+
             binding.emptyHeart.setOnClickListener() {
                 if (binding.emptyHeart.isVisible) {
                     binding.emptyHeart.isVisible = false
                     binding.fullHeart.isVisible = true
+
+
+                    //선호도 숫자 반영
+                    var presentHeart = binding.numOfHeart.text.toString()
+                    var changeHeart = presentHeart.toInt() + 1
+                    presentHeart = changeHeart.toString()
+                    binding.numOfHeart.text = presentHeart
+
 
                 }
             }
@@ -49,7 +60,20 @@ class RecyclerResultAdapter(private val dataString : ArrayList<List<String>>,pri
                     binding.fullHeart.isVisible = false
                     binding.emptyHeart.isVisible = true
 
+
+
+                   //선호도 숫자 반영
+                    var presentHeart = binding.numOfHeart.text.toString()
+                    var changeHeart = presentHeart.toInt() - 1
+                    presentHeart = changeHeart.toString()
+                    binding.numOfHeart.text = presentHeart
+
+                    
                 }
+            }
+            binding.nameOFRecipe.setOnClickListener() {
+                val intent = Intent(binding.nameOFRecipe?.context, WebActivity::class.java)//웹Activity intent 생성
+                ContextCompat.startActivity(binding.nameOFRecipe.context, intent, null)//레시피 이름 클릭시, intent로 변환
             }
         }
     }

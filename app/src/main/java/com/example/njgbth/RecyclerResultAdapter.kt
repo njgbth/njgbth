@@ -4,13 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintSet.VISIBLE
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.njgbth.databinding.IngredRecyclerBinding
 import com.example.njgbth.databinding.RecipeRecyclerBinding
+import com.google.firebase.firestore.core.View
+import java.lang.System.load
 
-class RecyclerResultAdapter(private val dataString : ArrayList<List<String>>,private val dataInt : ArrayList<List<Int>>) :RecyclerView.Adapter<RecyclerResultAdapter.ViewHolder>() {
+class RecyclerResultAdapter(private val dataString : ArrayList<List<String>>,private val dataInt : ArrayList<List<Int>>)
+    :RecyclerView.Adapter<RecyclerResultAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -32,8 +37,19 @@ class RecyclerResultAdapter(private val dataString : ArrayList<List<String>>,pri
             binding.nameOFRecipe.text = dataS[0]
             binding.numOfHeart.text = dataI[0].toString()
             Glide.with(binding.imgOfRecipe.context).load(R.drawable.basic).into(binding.imgOfRecipe)
-            binding.heart.setOnClickListener() {
-                Glide.with(binding.heart.context).load(R.drawable.fullheart).into(binding.heart)
+            binding.emptyHeart.setOnClickListener() {
+                if (binding.emptyHeart.isVisible) {
+                    binding.emptyHeart.isVisible = false
+                    binding.fullHeart.isVisible = true
+
+                }
+            }
+            binding.fullHeart.setOnClickListener() {
+                if (binding.fullHeart.isVisible) {
+                    binding.fullHeart.isVisible = false
+                    binding.emptyHeart.isVisible = true
+
+                }
             }
         }
     }

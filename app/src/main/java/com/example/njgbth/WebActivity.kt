@@ -18,7 +18,7 @@ class WebActivity : AppCompatActivity() {
             settings.javaScriptEnabled = true//자바스크립트 허용
         }
 
-        webView.loadUrl("https://www.naver.co.kr/")//여기에 주소 URL변경하기==< 레시피 주소
+        webView.loadUrl("https://www.10000recipe.com/")//여기에 주소 URL변경하기==< 레시피 주소
     }
 
     override fun onBackPressed() {

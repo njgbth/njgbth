@@ -3,6 +3,7 @@ package com.example.njgbth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.njgbth.databinding.ActivityResultBinding
@@ -31,7 +32,6 @@ class ResultActivity : AppCompatActivity() {
             DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL)
         )
-
         addDataString()
         addDataInt()
     }

@@ -1,5 +1,6 @@
 package com.example.njgbth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebChromeClient
@@ -7,10 +8,12 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 
 class WebActivity : AppCompatActivity() {
+    var link = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
-
+        val intent: Intent =getIntent()
+        link = intent.getStringExtra("link").toString()
         val webView = findViewById<WebView>(R.id.webView)
         webView.apply {
             webViewClient = WebViewClient()//페이지를 부르는 함수
@@ -18,7 +21,7 @@ class WebActivity : AppCompatActivity() {
             settings.javaScriptEnabled = true//자바스크립트 허용
         }
 
-        webView.loadUrl("https://www.10000recipe.com/")//여기에 주소 URL변경하기==< 레시피 주소
+        webView.loadUrl(link)//여기에 주소 URL변경하기==< 레시피 주소
     }
 
     override fun onBackPressed() {

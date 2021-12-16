@@ -8,15 +8,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Njgbth">
+        android:theme="@style/Theme.njgbth">
         <activity
-            android:name=".aaa"
+            android:name=".ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FindPwActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FindIdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true" />
         <activity
             android:name=".MainPage"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

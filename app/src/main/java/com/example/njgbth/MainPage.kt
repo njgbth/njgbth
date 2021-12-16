@@ -1,13 +1,28 @@
 package com.example.njgbth
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import android.widget.TextView
 import com.example.njgbth.databinding.ActivityMainPageBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.QueryDocumentSnapshot
+
+import com.google.firebase.firestore.QuerySnapshot
+
+import androidx.annotation.NonNull
+
+import com.google.android.gms.tasks.OnCompleteListener
+
+
+
 
 class MainPage : AppCompatActivity() {
     private lateinit var binding: ActivityMainPageBinding           //viewbinding
@@ -29,8 +44,10 @@ class MainPage : AppCompatActivity() {
                 return true
             }
         })
+
     }
     fun get_category(view: View) {              //textview onclick
+
         //println(binding.T2.text)              T2의 text값 출력
         if(cateid!=view.id){
             findViewById<TextView>(cateid).setBackgroundColor(Color.WHITE)  //기존선택값 색변경
@@ -39,7 +56,29 @@ class MainPage : AppCompatActivity() {
             findViewById<TextView>(cateid).setBackgroundColor(Color.LTGRAY)     //새로운 선택값 색 변경
         }
         //println(findViewById<TextView>(cateid).text)          //cateid의 text값 출력
+        db()
 
+    }
+    fun db(){
+        val db = Firebase.firestore
+        db.collection("recipe")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    document.reference.collection("재료").document("재료").get()
+                        .addOnSuccessListener { result ->
+                            Log.d(TAG, "${result.data}")
+
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.w(TAG, "Error getting documents.", exception)
+                        }
+                    Log.d(TAG, "${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
     }
 
 }

@@ -45,6 +45,14 @@ class RecyclerResultAdapter(private val dataString : ArrayList<List<String>>,pri
                     binding.emptyHeart.isVisible = false
                     binding.fullHeart.isVisible = true
 
+
+                    //선호도 숫자 반영
+                    var presentHeart = binding.numOfHeart.text.toString()
+                    var changeHeart = presentHeart.toInt() + 1
+                    presentHeart = changeHeart.toString()
+                    binding.numOfHeart.text = presentHeart
+
+
                 }
             }
             binding.fullHeart.setOnClickListener() {
@@ -52,6 +60,15 @@ class RecyclerResultAdapter(private val dataString : ArrayList<List<String>>,pri
                     binding.fullHeart.isVisible = false
                     binding.emptyHeart.isVisible = true
 
+
+
+                   //선호도 숫자 반영
+                    var presentHeart = binding.numOfHeart.text.toString()
+                    var changeHeart = presentHeart.toInt() - 1
+                    presentHeart = changeHeart.toString()
+                    binding.numOfHeart.text = presentHeart
+
+                    
                 }
             }
             binding.nameOFRecipe.setOnClickListener() {

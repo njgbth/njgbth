@@ -1,11 +1,13 @@
 package com.example.njgbth
 
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -25,6 +27,7 @@ class SignUpActivity : AppCompatActivity() {
         val firstPW = findViewById<EditText>(R.id.edtSignUpPw)
         val secondPW = findViewById<EditText>(R.id.edtSignUpRePw)
         val name = findViewById<EditText>(R.id.edtSignUpName)
+        auth = FirebaseAuth.getInstance()
         fun checkEmail():Boolean {
             var email = inputEmail.text.toString().trim()
             var idPattern = android.util.Patterns.EMAIL_ADDRESS
@@ -54,23 +57,40 @@ class SignUpActivity : AppCompatActivity() {
         button.setOnClickListener() {
             if (!checkEmail()) {
                 Toast.makeText(applicationContext,"이메일 형식이 아닙니다. 다시 입력하세요.",Toast.LENGTH_SHORT).show()
+                println("1")
             }
-            else {
-                if (!checkPW()) {
+            else if (!checkPW()) {
                     Toast.makeText(
                         applicationContext,
                         "비밀번호가 일치하지 않습니다. 다시 입력하세요.",
                         Toast.LENGTH_SHORT
                     ).show()
-                }
-                else {
-                    Toast.makeText(applicationContext,"축하합니다! 회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this,LoginActivity::class.java)
-                    startActivity(intent)
-                }
+                println("2")
+            }
+            else{
+                auth.createUserWithEmailAndPassword(inputEmail.text.toString(), firstPW.text.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            println("${inputEmail.text.toString()}+${firstPW.text.toString()}")
+                            Log.d(TAG, "축하합니다! 회원가입이 완료되었습니다.")
+                            Toast.makeText(
+                                baseContext, "축하합니다! 회원가입이 완료되었습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            val user = auth.currentUser
+                            println("3")
+                            finish()
+                        } else {
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            Toast.makeText(
+                                baseContext, "회원가입 실패",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            println("4")
+                        }
+                    }
             }
         }
-
     }
 
 }

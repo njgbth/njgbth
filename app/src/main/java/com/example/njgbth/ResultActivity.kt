@@ -1,5 +1,6 @@
 package com.example.njgbth
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -47,7 +48,6 @@ class ResultActivity : AppCompatActivity() {
                 DividerItemDecoration.VERTICAL)
         )
         addRecipe()
-        updatetest("a")
 
         val spinner = binding.spinner
         spinner.adapter = ArrayAdapter.createFromResource(this, R.array.sortList, android.R.layout.simple_spinner_item)
@@ -61,22 +61,15 @@ class ResultActivity : AppCompatActivity() {
                 id: Long
             ) {
                 when (position) {
-                    //가중치 순으로 보여주기 - 처음진입시
+                    //가중치 순으로 보여주기
                     0 -> {
                         weight_sort()
                     }
-                    //가중치 순으로 보여주기 선택시
+                    //선호도 순으로 보여주기 선택시
                     1 -> {
-                        weight_sort()
-
-
+                        like_sort()
                     }
-                    //선호도 순으로 보여주기 선택시, 0번 복붙
-                    2 -> {
 
-
-
-                    }
                 }
             }
         }
@@ -85,14 +78,48 @@ class ResultActivity : AppCompatActivity() {
     fun weight_sort(){
         dataRecipe.sortBy { it.weight }
         dataRecipe.reverse()
+        binding.resultRecycle.adapter = RecyclerResultAdapter(dataRecipe)
     }
     fun like_sort(){
         dataRecipe.sortBy { it.numOFHeart }
         dataRecipe.reverse()
+        binding.resultRecycle.adapter = RecyclerResultAdapter(dataRecipe)
     }
-    fun updatetest(docu : String){
+    fun addRecipe(){
+        if(getdata.isNullOrEmpty())
+            return
         val db = Firebase.firestore
-        db.collection("testdb").document("레시피명").update("선호도",5)
+        db.collection("recipe")
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    document.reference.collection("재료").document("재료").get()
+                        .addOnSuccessListener { result ->
+                            if (result != null) {
+                                val a = (getdata.toSet()?.subtract(result.data!!.keys.toSet()))
+                                if (a.isEmpty()) {
+                                    println("이 레시피다 : ${document.id} ${document.get("링크")} ${document.get("선호도")}")
+                                    println(result.data)
+                                    var sum=0
+                                    for(i in getdata.toSet())
+                                        sum+=result.data!!.get(i).toString().toInt()
+                                    dataRecipe.add(RecipeData(document.id,document.get("링크") as String, sum, document.get("선호도").toString().toInt()))
+//                                    getweight.add(sum)
+//                                    dataString.add(document.id)
+//                                    datalink.add(document.get("링크") as String)
+//                                    dataInt.add(document.get("선호도").toString().toInt())
+//                                    println(getweight)
+                                    weight_sort()
+                                }
+                            }
+                        }
+                }
+
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents.", exception)
+
+            }
     }
     suspend fun db(){
         val db = Firebase.firestore
@@ -115,7 +142,6 @@ class ResultActivity : AppCompatActivity() {
                     val a = (getdata.toSet()?.subtract(result.data!!.keys.toSet()))
                     if(a.isEmpty()){
                         println("이 레시피다 : ${document.id}")
-                        dataRecipe.add(document.id,)
                         datalink.add(document.get("링크") as String)
                         dataInt.add(document.get("선호도").toString().toInt())
                     }
@@ -125,24 +151,5 @@ class ResultActivity : AppCompatActivity() {
                     //println(getdata.toSet())
                 }
             }.await()
-    }
-    fun addRecipe(){
-        for(document in document){
-            document.reference.collection("재료").document("재료").get()
-                .addOnSuccessListener { result ->
-
-                    if (result != null) {
-                        val a = (getdata.toSet()?.subtract(result.data!!.keys.toSet()))
-                        if (a.isEmpty()) {
-                            println("이 레시피다 : ${document.id} ${document.get("링크")} ${document.get("선호도")}")
-                            dataRecipe.add(RecipeData(document.id,document.get("링크"),document.get("선호도")))
-                            dataString.add(document.id)
-                            datalink.add(document.get("링크") as String)
-                            dataInt.add(document.get("선호도").toString().toInt())
-                        }
-                    }
-                }
-        }
-        println("3333333")
     }
 }
